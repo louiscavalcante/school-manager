@@ -1,0 +1,69 @@
+<div class="item">
+	<div>Avatar URL</div>
+	<div>
+		<input
+			type="url"
+			name="avatar_url"
+			placeholder="http://"
+			value="{{ teacher.avatar_url }}"
+		/>
+	</div>
+</div>
+
+<div class="item">
+	<div>Full Name</div>
+	<div>
+		<input
+			type="text"
+			name="full_name"
+			placeholder="Type the full name here"
+			value="{{ teacher.full_name }}"
+		/>
+	</div>
+</div>
+
+<div class="item">
+	<div>Birth Date</div>
+	<div>
+		<input type="date" name="birth" value="{{ teacher.birth }}" />
+	</div>
+</div>
+
+<div class="item">
+	<div>Degree Level</div>
+	<div>
+		<select name="degree_level"">
+			<option value="empty">Please select an option</option>
+			<option value="associate" {% if teacher.degree_level == 'associate'%} selected {% endif %}>Associate degree</option>
+			<option value="bachelor" {% if teacher.degree_level == 'bachelor'%} selected {% endif %}>Bachelor's degree</option>
+			<option value="master" {% if teacher.degree_level == 'master' %} selected {% endif %}>Master's degree</option>
+			<option value="doctor" {% if teacher.degree_level == 'doctor' %} selected {% endif %}>Doctoral degree</option>
+		</select>
+	</div>
+</div>
+
+<div class="item">
+	<div>Attendance Type</div>
+	<div>
+		<span>
+			<input type="radio" name="attendance_type" value="online" {% if teacher.attendance_type
+			== 'online' %} checked {% endif %}/>Online
+		</span>
+		<span>
+			<input type="radio" name="attendance_type" value="in_person" {% if
+			teacher.attendance_type == 'in_person' %} checked {% endif %}/>In-Person
+		</span>
+	</div>
+</div>
+
+<div class="item">
+	<div>Teaches</div>
+	<div>
+		<input
+			type="text"
+			name="teaches"
+			placeholder="e.g. Mathematics, Physics"
+			value="{{ teacher.teaches }}"
+		/>
+	</div>
+</div>
