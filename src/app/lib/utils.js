@@ -1,5 +1,5 @@
 module.exports = {
-	age: function (timestamp) {
+	age(timestamp) {
 		const today = new Date()
 		const birthDate = new Date(timestamp)
 
@@ -12,7 +12,7 @@ module.exports = {
 
 		return age
 	},
-	date: function (timestamp) {
+	date(timestamp) {
 		const date = new Date(timestamp)
 
 		const year = date.getUTCFullYear()
@@ -29,7 +29,7 @@ module.exports = {
 			birthDay: `${day}/${month}`,
 		}
 	},
-	graduation: function (degree) {
+	graduation(degree) {
 		switch (degree) {
 			case 'associate':
 				return 'Associate degree'
@@ -41,7 +41,7 @@ module.exports = {
 				return 'Doctoral degree'
 		}
 	},
-	grade: function (year) {
+	grade(year) {
 		switch (year) {
 			case '8':
 				return '8th Grade'
