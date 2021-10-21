@@ -1,8 +1,21 @@
 const { age, graduation, date } = require('../lib/utils.js')
+const Teacher = require('../models/teacher.js')
 
 module.exports = {
 	index(req, res) {
-		return res.render('teachers/index')
+		Teacher.all(function (teachers) {
+			const newTeachers = teachers.map(splitFunc)
+
+			function splitFunc(teacher) {
+				let teachersFormatted = {
+					...teacher,
+					teaches: teacher.teaches.split(','),
+				}
+				return teachersFormatted
+			}
+
+			return res.render('teachers/index', { teachers: newTeachers })
+		})
 	},
 	create(req, res) {
 		return res.render('teachers/create')
@@ -16,15 +29,32 @@ module.exports = {
 			}
 		}
 
-		let { avatar_url, full_name, birth, degree_level, attendance_type, teaches } = req.body
-
-        return
+		Teacher.create(req.body, function (teacher) {
+			return res.redirect(`/teachers/${teacher.id}`)
+		})
 	},
 	show(req, res) {
-        return
+		Teacher.find(req.params.id, function (foundTeacher) {
+			if (!foundTeacher) return res.send('Teacher not found!')
+
+			foundTeacher.age = age(foundTeacher.birth)
+			foundTeacher.degree_level = graduation(foundTeacher.degree_level)
+			foundTeacher.teaches = foundTeacher.teaches.split(',')
+			foundTeacher.created_at = new Intl.DateTimeFormat('pt-BR').format(
+				foundTeacher.created_at
+			)
+
+			return res.render('teachers/show', { teacher: foundTeacher })
+		})
 	},
 	edit(req, res) {
-        return
+		Teacher.find(req.params.id, function (foundTeacher) {
+			if (!foundTeacher) return res.send('Teacher not found!')
+
+			foundTeacher.birth = date(foundTeacher.birth).iso
+
+			return res.render('teachers/edit', { teacher: foundTeacher })
+		})
 	},
 	put(req, res) {
 		const keys = Object.keys(req.body)
@@ -35,9 +65,14 @@ module.exports = {
 			}
 		}
 
-        return
+		Teacher.update(req.body, function () {
+			return res.redirect(`/teachers/${req.body.id}`)
+		})
 	},
 	delete(req, res) {
-        return
+		Teacher.delete(req.body.id, function () {
+			return res.redirect('/teachers')
+		})
+
 	},
 }

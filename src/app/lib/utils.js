@@ -27,6 +27,7 @@ module.exports = {
 			year,
 			iso: `${year}-${month}-${day}`,
 			birthDay: `${day}/${month}`,
+			format: `${day}/${month}/${year}`,
 		}
 	},
 	graduation(degree) {
@@ -43,15 +44,15 @@ module.exports = {
 	},
 	grade(year) {
 		switch (year) {
-			case '8':
+			case 8:
 				return '8th Grade'
-			case '9':
+			case 9:
 				return '9th Grade'
-			case '10':
+			case 10:
 				return '10th Grade'
-			case '11':
+			case 11:
 				return '11th Grade'
-			case '12':
+			case 12:
 				return '12th Grade'
 		}
 	},
