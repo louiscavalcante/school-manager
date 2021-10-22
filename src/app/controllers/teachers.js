@@ -3,19 +3,29 @@ const Teacher = require('../models/teacher.js')
 
 module.exports = {
 	index(req, res) {
-		Teacher.all(function (teachers) {
-			const newTeachers = teachers.map(splitFunc)
+		const { filter } = req.query
 
-			function splitFunc(teacher) {
-				let teachersFormatted = {
-					...teacher,
-					teaches: teacher.teaches.split(','),
-				}
-				return teachersFormatted
+		function splitFunc(teacher) {
+			let teachersFormatted = {
+				...teacher,
+				teaches: teacher.teaches.split(','),
 			}
+			return teachersFormatted
+		}
 
-			return res.render('teachers/index', { teachers: newTeachers })
-		})
+		if (filter) {
+			Teacher.findBy(filter, function (teachers) {
+				const newTeachers = teachers.map(splitFunc)
+
+				return res.render('teachers/index', { teachers: newTeachers, filter })
+			})
+		} else {
+			Teacher.all(function (teachers) {
+				const newTeachers = teachers.map(splitFunc)
+
+				return res.render('teachers/index', { teachers: newTeachers })
+			})
+		}
 	},
 	create(req, res) {
 		return res.render('teachers/create')
@@ -73,6 +83,5 @@ module.exports = {
 		Teacher.delete(req.body.id, function () {
 			return res.redirect('/teachers')
 		})
-
 	},
 }

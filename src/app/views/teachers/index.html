@@ -1,12 +1,19 @@
 {% extends "layout.html" %} {% block content %}
 <div class="card table-container">
-	<a href="/teachers/create">New</a>
+	<div class="header">
+		<a class="button" href="/teachers/create">New</a>
+		<form action="/teachers" method="GET">
+			<input type="text" name="filter" placeholder="Filter by Name or Teaches" value="{{ filter }}"/>
+			<button type="submit">Filter</button>
+		</form>
+	</div>
 
 	<table width="100%">
 		<thead>
 			<tr>
 				<th>Teacher</th>
 				<th>Teaches</th>
+				<th>Students</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -22,6 +29,9 @@
 					{% for item in teacher.teaches %}
 					<span>{{ item }}</span>
 					{% endfor %}
+				</td>
+				<td>
+					<p class="card-students_count">{{ teacher.total_students }}</p>
 				</td>
 				<td><a href="/teachers/{{ teacher.id }}">show</a></td>
 			</tr>

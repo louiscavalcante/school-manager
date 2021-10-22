@@ -63,3 +63,15 @@
         >
     </div>
 </div>
+
+<div class="item">
+	<div>Teachers</div>
+	<div>
+		<select name="teacher"">
+			<option value="empty">Please select an option</option>
+            {% for teacher in teacherOptions %}
+			<option value="{{ teacher.id }}" {% if student.student_id == teacher.id %} selected {% endif %}>{{ teacher.full_name }}</option>
+            {% endfor %}
+		</select>
+	</div>
+</div>
