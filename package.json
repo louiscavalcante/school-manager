@@ -6,8 +6,8 @@
 	"scripts": {
 		"start": "node src/server.js",
 		"dev": "npm-run-all -p nodemon browser-sync",
-		"nodemon": "nodemon src/server.js",
-		"browser-sync": "browser-sync start --proxy http://localhost:5000 --files 'public, src/app/views'"
+		"nodemon": "nodemon --legacy-watch --watch public --watch src src/server.js",
+		"browser-sync": "browser-sync start --proxy http://localhost:5000 --files 'public, src' --no-notify --reload-delay 500"
 	},
 	"dependencies": {
 		"express": "^4.17.1",

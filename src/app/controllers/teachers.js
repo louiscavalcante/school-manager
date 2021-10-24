@@ -3,7 +3,11 @@ const Teacher = require('../models/teacher.js')
 
 module.exports = {
 	index(req, res) {
-		const { filter } = req.query
+		let { filter, page, limit } = req.query
+
+		page = page || 1
+		limit = limit || 2
+		let offset = limit * (page - 1)
 
 		function splitFunc(teacher) {
 			let teachersFormatted = {
@@ -13,19 +17,19 @@ module.exports = {
 			return teachersFormatted
 		}
 
-		if (filter) {
-			Teacher.findBy(filter, function (teachers) {
+		const params = {
+			filter,
+			page,
+			limit,
+			offset,
+			callback(teachers) {
 				const newTeachers = teachers.map(splitFunc)
 
 				return res.render('teachers/index', { teachers: newTeachers, filter })
-			})
-		} else {
-			Teacher.all(function (teachers) {
-				const newTeachers = teachers.map(splitFunc)
-
-				return res.render('teachers/index', { teachers: newTeachers })
-			})
+			},
 		}
+
+		Teacher.paginate(params)
 	},
 	create(req, res) {
 		return res.render('teachers/create')
