@@ -70,7 +70,7 @@
 		<select name="teacher"">
 			<option value="empty">Please select an option</option>
             {% for teacher in teacherOptions %}
-			<option value="{{ teacher.id }}" {% if student.student_id == teacher.id %} selected {% endif %}>{{ teacher.full_name }}</option>
+			<option value="{{ teacher.id }}" {% if student.teacher_id == teacher.id %} selected {% endif %}>{{ teacher.full_name }}</option>
             {% endfor %}
 		</select>
 	</div>

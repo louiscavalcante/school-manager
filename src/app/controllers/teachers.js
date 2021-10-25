@@ -25,7 +25,11 @@ module.exports = {
 			callback(teachers) {
 				const newTeachers = teachers.map(splitFunc)
 
-				return res.render('teachers/index', { teachers: newTeachers, filter })
+				const pagination = {
+					total: Math.ceil(teachers[0].total / limit),
+					page,
+				}
+				return res.render('teachers/index', { teachers: newTeachers, filter, pagination })
 			},
 		}
 
