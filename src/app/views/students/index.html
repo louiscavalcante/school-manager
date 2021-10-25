@@ -6,7 +6,7 @@
 		<thead>
 			<tr>
 				<th>Student</th>
-                <th>Email</th>
+				<th>Email</th>
 				<th>School Year</th>
 				<th>Action</th>
 			</tr>
@@ -16,8 +16,10 @@
 			{% for student in students %}
 			<tr>
 				<td>
-					<span style="background-image: url({{ student.avatar_url }})"></span> {{
-					student.full_name }}
+					<div class="avatar_container">
+						<span style="background-image: url({{ student.avatar_url }})"></span> {{
+						student.full_name }}
+					</div>
 				</td>
 				<td>{{ student.email }}</td>
 				<td>{{ student.school_year }}</td>

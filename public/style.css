@@ -226,7 +226,7 @@ tbody tr:last-child td {
 	border-bottom: none;
 }
 
-tbody tr td:first-child {
+tbody tr td .avatar_container:first-child {
 	display: grid;
 	grid-template-columns: 68px 1fr;
 	align-items: center;

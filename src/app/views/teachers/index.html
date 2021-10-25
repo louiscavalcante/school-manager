@@ -3,7 +3,12 @@
 	<div class="header">
 		<a class="button" href="/teachers/create">New</a>
 		<form action="/teachers" method="GET">
-			<input type="text" name="filter" placeholder="Filter by Name or Teaches" value="{{ filter }}"/>
+			<input
+				type="text"
+				name="filter"
+				placeholder="Filter by Name or Teaches"
+				value="{{ filter }}"
+			/>
 			<button type="submit">Filter</button>
 		</form>
 	</div>
@@ -22,8 +27,10 @@
 			{% for teacher in teachers %}
 			<tr>
 				<td>
-					<span style="background-image: url({{ teacher.avatar_url }})"></span> {{
-					teacher.full_name }}
+					<div class="avatar_container">
+						<span style="background-image: url({{ teacher.avatar_url }})"></span> {{
+						teacher.full_name }}
+					</div>
 				</td>
 				<td>
 					{% for item in teacher.teaches %}
@@ -38,10 +45,11 @@
 			{% endfor %}
 		</tbody>
 	</table>
-    
-    <div class="pagination"
-        data-page="{{ pagination.page }}"
-        data-total="{{ pagination.total }}"
-    ></div>
+
+	<div
+		class="pagination"
+		data-page="{{ pagination.page }}"
+		data-total="{{ pagination.total }}"
+	></div>
 </div>
 {% endblock content %}
