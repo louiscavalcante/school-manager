@@ -3,19 +3,36 @@ const Student = require('../models/student.js')
 
 module.exports = {
 	index(req, res) {
-		Student.all(function (students) {
-			const newStudents = students.map(splitFunc)
+		let { filter, page, limit } = req.query
 
-			function splitFunc(student) {
-				let studentsFormatted = {
-					...student,
-					school_year: grade(student.school_year),
-				}
-				return studentsFormatted
+		page = page || 1
+		limit = limit || 2
+		let offset = limit * (page - 1)
+
+		function splitFunc(student) {
+			let studentsFormatted = {
+				...student,
+				school_year: grade(student.school_year),
 			}
+			return studentsFormatted
+		}
 
-			return res.render('students/index', { students: newStudents })
-		})
+		const params = {
+			filter,
+			page,
+			limit,
+			offset,
+			callback(students) {
+				const newStudents = students.map(splitFunc)
+
+				const pagination = {
+					total: Math.ceil(students[0].total / limit),
+					page,
+				}
+				return res.render('students/index', { students: newStudents, filter, pagination })
+			},
+		}
+		Student.paginate(params)
 	},
 	create(req, res) {
 		Student.teachersSelectOptions(function (options) {
