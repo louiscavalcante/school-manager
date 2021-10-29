@@ -60,18 +60,6 @@
 			</div>
 		</div>
 
-		<div class="item">
-			<div>Teacher</div>
-			<div>
-				<select name="teacher">
-					<option value="empty" selected>Please select an option</option>
-                    {% for teacher in teacherOptions %}
-					<option value="{{ teacher.id }}">{{ teacher.full_name }}</option>
-                    {% endfor %}
-				</select>
-			</div>
-		</div>
-
 		<button type="submit">Save</button>
 	</section>
 </form>
