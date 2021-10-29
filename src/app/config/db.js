@@ -19,7 +19,7 @@ if (process.env.APP_ENV === 'development') {
 	console.log(red('----- Production -----'))
 
 	const dbHeroku = new Client({
-		connectionString: process.env.DATABASE_URL,
+		connectionString: process.env.DATABASE_URL+'?ssl=true',
 		ssl: {
 			rejectUnauthorized: false,
 		},
