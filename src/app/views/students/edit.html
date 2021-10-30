@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card">
+	<section
+		class="avatar"
+		style="
+			background: url({{ student.avatar_url }}) no-repeat center
+				center / cover;
+		"
+	></section>
+
+	<section class="details">
+		<form method="POST">
+			<h3>Edit Student</h3>
+
+			{% include 'students/fields.html' %}
+
+			<div class="buttons">
+				<button formaction="/students?_method=PUT" type="submit">Save</button>
+
+				<button id="form-delete" formaction="/students?_method=DELETE" type="submit">
+					Delete
+				</button>
+			</div>
+
+			<input type="hidden" name="id" value="{{ student.id }}" />
+		</form>
+	</section>
+</div>
+
+{% include 'confirm.html' %}
+
+{% endblock content %}

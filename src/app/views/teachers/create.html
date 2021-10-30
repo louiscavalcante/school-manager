@@ -1,0 +1,76 @@
+{% extends "layout.html" %} {% block content %}
+<form class="card" method="POST" action="/teachers">
+	<section
+		class="avatar"
+		style="
+			background: url(https://source.unsplash.com/collection/2311602/500x500) no-repeat center
+				center / cover;
+		"
+	></section>
+
+	<section class="details">
+		<h3>New Teacher</h3>
+
+		<div class="item">
+			<div>Avatar URL</div>
+			<div>
+				<input type="url" name="avatar_url" placeholder="http://" />
+			</div>
+		</div>
+
+		<div class="item">
+			<div>Full Name</div>
+			<div>
+				<input type="text" name="full_name" />
+			</div>
+		</div>
+
+		<div class="item">
+			<div>Birth Date</div>
+			<div>
+				<input type="date" name="birth" id="" />
+			</div>
+		</div>
+
+		<div class="item">
+			<div>Degree Level</div>
+			<div>
+				<select name="degree_level">
+					<option value="empty" selected>Please select an option</option>
+					<option value="associate">Associate degree</option>
+					<option value="bachelor">Bachelor's degree</option>
+					<option value="master">Master's degree</option>
+					<option value="doctor">Doctoral degree</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="item">
+			<div>Attendance Type</div>
+			<div>
+				<span
+					><input
+						type="radio"
+						name="attendance_type"
+						value="online"
+						checked
+					/>Online</span
+				>
+				<span
+					><input type="radio" name="attendance_type" value="in_person" />In-Person</span
+				>
+			</div>
+		</div>
+
+		<div class="item">
+			<div>Teaches</div>
+			<div>
+				<input type="text" name="teaches" placeholder="e.g. Mathematics, Physics" />
+			</div>
+		</div>
+
+		<button type="submit">Save</button>
+	</section>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,79 @@
+{% extends "layout.html" %} {% block content %}
+<form class="card" method="POST" action="/students">
+	<section
+		class="avatar"
+		style="
+			background: url(https://source.unsplash.com/collection/2311602/500x500) no-repeat center
+				center / cover;
+		"
+	></section>
+
+	<section class="details">
+		<h3>New Student</h3>
+
+		<div class="item">
+			<div>Avatar URL</div>
+			<div>
+				<input type="url" name="avatar_url" placeholder="http://" />
+			</div>
+		</div>
+
+		<div class="item">
+			<div>Full Name</div>
+			<div>
+				<input type="text" name="full_name" />
+			</div>
+		</div>
+
+		<div class="item">
+			<div>Birth Date</div>
+			<div>
+				<input type="date" name="birth" id="" />
+			</div>
+		</div>
+
+		<div class="item">
+			<div>Email</div>
+			<div>
+				<input type="email" name="email" />
+			</div>
+		</div>
+
+		<div class="item">
+			<div>School Year</div>
+			<div>
+				<select name="school_year">
+					<option value="empty" selected>Please select an option</option>
+					<option value="8">8th Grade</option>
+					<option value="9">9th Grade</option>
+					<option value="10">10th Grade</option>
+					<option value="11">11th Grade</option>
+					<option value="12">12th Grade</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="item">
+			<div>Weekly Workload</div>
+			<div>
+				<input type="number" name="workload" value="0" />
+			</div>
+		</div>
+
+		<div class="item">
+			<div>Teacher</div>
+			<div>
+				<select name="teacher">
+					<option value="empty" selected>Please select an option</option>
+                    {% for teacher in teacherOptions %}
+					<option value="{{ teacher.id }}">{{ teacher.full_name }}</option>
+                    {% endfor %}
+				</select>
+			</div>
+		</div>
+
+		<button type="submit">Save</button>
+	</section>
+</form>
+
+{% endblock content %}

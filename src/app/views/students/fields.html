@@ -1,0 +1,77 @@
+<div class="item">
+	<div>Avatar URL</div>
+	<div>
+		<input
+			type="url"
+			name="avatar_url"
+			placeholder="http://"
+			value="{{ student.avatar_url }}"
+		/>
+	</div>
+</div>
+
+<div class="item">
+	<div>Full Name</div>
+	<div>
+		<input
+			type="text"
+			name="full_name"
+			value="{{ student.full_name }}"
+		/>
+	</div>
+</div>
+
+<div class="item">
+	<div>Birthday</div>
+	<div>
+		<input type="date" name="birth" value="{{ student.birth }}" />
+	</div>
+</div>
+
+<div class="item">
+	<div>Email</div>
+	<div>
+		<input
+			type="email"
+			name="email"
+			value="{{ student.email }}"
+		/>
+	</div>
+</div>
+
+<div class="item">
+	<div>School Year</div>
+	<div>
+		<select name="school_year"">
+			<option value="empty">Please select an option</option>
+			<option value="8" {% if student.school_year == '8' %} selected {% endif %}>8th Grade</option>
+			<option value="9" {% if student.school_year == '9' %} selected {% endif %}>9th Grade</option>
+			<option value="10" {% if student.school_year == '10' %} selected {% endif %}>10th Grade</option>
+			<option value="11" {% if student.school_year == '11' %} selected {% endif %}>11th Grade</option>
+			<option value="12" {% if student.school_year == '12' %} selected {% endif %}>12th Grade</option>
+		</select>
+	</div>
+</div>
+
+<div class="item">
+    <div>Weekly Workload</div>
+    <div>
+        <input
+            type="number"
+            name="workload"
+            value="{{ student.workload }}"
+        >
+    </div>
+</div>
+
+<div class="item">
+	<div>Teachers</div>
+	<div>
+		<select name="teacher"">
+			<option value="empty">Please select an option</option>
+            {% for teacher in teacherOptions %}
+			<option value="{{ teacher.id }}" {% if student.teacher_id == teacher.id %} selected {% endif %}>{{ teacher.full_name }}</option>
+            {% endfor %}
+		</select>
+	</div>
+</div>
