@@ -25,6 +25,16 @@ module.exports = {
 			callback(students) {
 				const newStudents = students.map(splitFunc)
 
+				if (students[0] === undefined) {
+					const total = 1
+					return res.render('students/index', {
+						student: newStudents,
+						filter,
+						page,
+						total,
+					})
+				}
+
 				const pagination = {
 					total: Math.ceil(students[0].total / limit),
 					page,
