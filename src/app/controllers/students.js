@@ -36,7 +36,7 @@ module.exports = {
 				}
 
 				const pagination = {
-					total: Math.ceil(students[0].total / limit),
+					total: Math.ceil(students[0]?.total / limit),
 					page,
 				}
 				return res.render('students/index', { students: newStudents, filter, pagination })
